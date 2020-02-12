@@ -52,7 +52,7 @@ const Error = styled.div`
     margin-bottom: 2rem;
 `;
 
-const Formulario = ({ guardarResumen }) => {
+const Formulario = ({ guardarResumen, guardarCargando }) => {
 
     //State de los datos del formulario
     const [datos, guardarDatos] = useState({
@@ -97,27 +97,36 @@ const Formulario = ({ guardarResumen }) => {
         // Por cada año hay que restar el 3%
         resultado -= ((diferencia * 3) * resultado) / 100;
 
-        console.log(resultado);
 
         // Americano 15%
         // Asiatico 5 %
         // Europeo 30%
         resultado = calcularMarca(marca) * resultado;
 
-        console.log(resultado);
-
         // Basico aumenta 20%
         // Completo 50%
         const incrementoPlan = obtenerPlan(plan);
         //Float para obtener decimales y toFixed para decir cuantos decimales
         resultado = parseFloat(incrementoPlan * resultado).toFixed(2);
-        console.log(resultado);
-        // Total
 
-        guardarResumen({
-            cotizacion: resultado,
-            datos
-        })
+
+        guardarCargando(true);
+
+        setTimeout(() => {
+
+            // Elimina el spinner
+            guardarCargando(false);
+
+            // Total
+            // Pasa la información al componente principal
+            guardarResumen({
+                cotizacion: resultado,
+                datos
+            });
+        }, 1000);
+
+
+
 
 
     }
