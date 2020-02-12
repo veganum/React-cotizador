@@ -29,7 +29,7 @@ function App() {
 
   // Extraer datos
 
-  const { datos } = resumen;
+  const { cotizacion, datos } = resumen;
 
 
   return (
@@ -44,6 +44,11 @@ function App() {
         <Resumen
           datos={datos}
         />
+
+        <Resultado
+          cotizacion={cotizacion}
+        />
+
       </ContenedorFormulario>
     </Contenedor>
   );
